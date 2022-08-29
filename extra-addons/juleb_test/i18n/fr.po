@@ -1,0 +1,4 @@
+#. module: juleb_test
+#: model:stock.picking.type,name:juleb_test.return
+msgid "Return"
+msgstr "Retour"

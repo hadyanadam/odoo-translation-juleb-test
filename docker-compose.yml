@@ -1,0 +1,29 @@
+version: '3.1'
+services:
+  odoo:
+    image: odoo@sha256:ed8f7b440bd5b5b7b19efb639f3a3a2d733bf213e7529b7999231111b38b3f53
+    depends_on:
+      - db
+    ports:
+      - "8091:8069"
+    environment:
+      - HOST=db
+      - USER=odoo
+      - PASSWORD=odoo123
+    volumes:
+      - juleb-web-data:/var/lib/odoo
+      - ./config:/etc/odoo
+      - ./extra-addons:/mnt/extra-addons
+  db:
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=odoo123
+      - POSTGRES_USER=odoo
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - juleb-db-data:/var/lib/postgresql/data/pgdata
+
+volumes:
+  juleb-web-data:
+  juleb-db-data:
